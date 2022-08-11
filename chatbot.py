@@ -15,7 +15,6 @@ words = pickle.load(open("words.pkl", "rb"))
 classes = pickle.load(open("classes.pkl", "rb"))
 model = load_model("chatbot_model.model")
 
-result = 0
 def clean_up_sentence(sentence):
     sentence_words = nltk.word_tokenize(sentence)
     sentence_words = [lemmatizer.lemmatize(word) for word in sentence_words]
@@ -43,6 +42,7 @@ def predict_class(sentence):
     return return_list
 
 def get_response(intents_list, intents_json):
+    result = 0
     tag = intents_list[0]["intent"]
     list_of_intents = intents_json["intents"]
     for i in list_of_intents:
