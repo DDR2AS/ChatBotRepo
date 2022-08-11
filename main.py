@@ -13,5 +13,8 @@ def print_hi(name):
 if __name__ == '__main__':
     print_hi('Diego Alonso Avila')
     print('jaguar ')
+    print('segunda linea')
+    print('test3')
+
 
 # See PyCharm help at https://www.jetbrains.com/help/pycharm/
