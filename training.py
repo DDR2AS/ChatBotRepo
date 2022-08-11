@@ -9,7 +9,7 @@ from tensorflow.keras.models import Sequential
 from tensorflow.keras.layers import Dense,Activation,Dropout
 from tensorflow.keras.optimizers import SGD
 
-lemmatizer = WordNetLemmatizer
+lemmatizer = WordNetLemmatizer()
 intents = json.loads(open('intents.json').read()) #Creación de diccionario
 
 #Creamos 3 listas vacias
@@ -22,12 +22,27 @@ ignore_letters = ['?','!','.',',']
 for intent in intents['intents']:
     for pattern in intent['patterns']:
         word_list = nltk.word_tokenize(pattern) #Al recibir una cadena de caracteres, se dividen en una lista de palabras individuales en una collección
-        words.append(word_list)
+        words.extend(word_list)
         documents.append((word_list,intent['tag'])) #Pasamos una tupla
         #Luego verificamos si la clase se encuentra en nuestra lista de clases
         if intent['tag'] not in classes:
             classes.append(intent['tag'])
 
-print(documents)
+words = [lemmatizer.lemmatize(word) for word in words if word not in ignore_letters]
+words = sorted(set(words))
 
-print("gaa")
+classes = sorted(set(classes))
+
+pickle.dump(words, open("words.pkl", "wb"))
+pickle.dump(words, open("classes.pkl", "wb"))
+            
+training=[]
+output_empty=[0]*len(classes)
+
+for document in documents:
+    bag=[]
+    word_patterns=document[0]
+    word_patterns=[lemmatizer.lemmatize(word.lower())for word in word_patterns]
+    for word in words:
+        bag.append(1) if word in word natterns else bag.append(0)
+   output row
