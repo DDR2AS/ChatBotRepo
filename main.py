@@ -2,8 +2,8 @@
 
 # Press Mayús+F10 to execute it or replace it with your code.
 # Press Double Shift to search everywhere for classes, files, tool windows, actions, and settings.
-from secret import password
 
+import sys
 def print_hi(name):
     # Use a breakpoint in the code line below to debug your script.
     print(f'Hi, {name}')  # Press Ctrl+F8 to toggle the breakpoint.
@@ -16,8 +16,8 @@ if __name__ == '__main__':
     print('jaguar ')
     print('segunda linea')
     print('test3')
-    print(password)
-    print(my_function(2,5))
 
+    print(my_function(2,5))
+    print(sys.version)
 
 # See PyCharm help at https://www.jetbrains.com/help/pycharm/
