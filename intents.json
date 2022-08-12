@@ -21,7 +21,7 @@
   "responses":  ["No"]},
 
   {"tag":  "hours",
-  "patterns": ["When are you guys open?"],
+  "patterns": ["When are you guys open"],
   "responses":  ["24/7"]}
 ] }
 
