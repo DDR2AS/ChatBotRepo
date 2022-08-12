@@ -73,3 +73,5 @@ timezone = "America/Bogota"
 #Usando nuestra función
 event = CreateBodyEvent('Cita con caardiologo','Hosp. Almenara','Consulta general',start_time,end_time,timezone)
 service.events().insert(calendarId=calendar_id, body=event).execute()
+
+print("ga")
