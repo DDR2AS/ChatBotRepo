@@ -46,10 +46,9 @@ def main():
             while flag:
                 try:
                     strDNI_number = input("Digite su número de DNI: ")
-                    c = int(strDNI_number)
                     if len(strDNI_number) != 8:
                         raise ZeroDivisionError
-                    DNI_number = c
+
                 except ValueError:
                     print("Por favor ingrese solo números 🤗")
                 except ZeroDivisionError:
@@ -68,8 +67,7 @@ def main():
                         while flag_1:
                             print("Necesitaré algunos datos para que agendemos una cita ☺\nRecuerde que cada una dura de 30 minutos")
                             print(f'Si le es de ayuda la fecha actual es {time.strftime("%d/%m/%y")}')
-                            print("Tambien recuerde que solo puede agendar solo una cita por mes y solo hasta un mes "
-                                  "después de la fecha actual")
+                            print("Tambien recuerde que solo puede agendar solo una cita después de la fecha actual (ejem : 13 august 4:30 pm)")
 
                             #Preguntamos el día y hora de la cita
                             strDateAppointment = input("Indique la fecha y la hora de inicio de la cita: ")
@@ -77,6 +75,7 @@ def main():
                             #Creación del evento
                             matches = datefinder.find_dates(strDateAppointment)
                             match = list(matches)
+                            # Interaccion con GoogleCalendar para saber si hay cupos (por implementar)
                             if len(match):
                                 #Si tenemos una fecha válida encontrada
                                 print(f'La fecha es: {match[0]}')
@@ -88,27 +87,25 @@ def main():
 
                             #Mes = time.strftime("%d/%m/%y")[3:5] # No hay necesidad de preguntar el mes
                             #Dia = input("Que dia quiere su cita?: ")
-                            # Interaccion con GoogleCalendar para saber si hay cupos
                             #print("¿A que hora quiere que sea su cita?")
                             #print("Aquí le enseñó horas validas => 10:30:00, 19:00:00, 06:30:00")
                             #TiempoInicio_Hora, TiempoInicio_Minuto, TiempoInicio_Segundo = input("Ingrese la fecha en "
                                                                                                 # "el siguiente "
                                                                                                 # "formato (HH:MM:SS): "
                                                                                                 # "").strip().split(":")
-                            # Interaccion con GoogleCalendar para saber si hay cupos
+                            # Interacción con GoogleCalendar para saber si hay cupos
                             if hay_cupos & fecha_valida:
-                                print("Tenemos consultas para el area de cardiologia y consultas generales")
-                                print("Recuerde solo ingresar o 'Cardiologia' o 'General'")
+                                print("Tenemos consultas para el area de cardiologia y consultas generales\nRecuerde solo ingresar o 'Cardiologia' o 'General'")
                                 TipoConsulta = input("¿Que tipo de consulta desea?: ").strip()
                                 print("Espere unos instantes mientras se reserva su cita")
-                                #Creación de la descripcisón
+                                #Creación de la descripción
                                 description = "Hospital EsSalud\n" + "Paciente: "+ DNI_owner_name
                                 # Se crea el evento en GoogleCalendar
                                 eventbody = CreateEvent(calendar_id,service,strDateAppointment,TipoConsulta,description)
                                 if eventbody != None:
-                                    print(f"La cita fue agendada con éxito!!\n {eventbody}")
+                                    print(f"La cita fue agendada con éxito para el {match}!!\n {eventbody}")
                                 else:
-                                    print("No se agendo mano")
+                                    print("No se agendo bro")
                                 message = input("*: ") # Supuestamente, un usuario normal aquí se despediria V:
                                 # message = "adios"
                                 ints = predict_class(message)
@@ -126,6 +123,7 @@ def main():
             res = get_response(ints)
             print(res)
             accident_information = input("Ingrese información de lo sucedido: ")
+
         elif detected_class == "despedidas":
             res = get_response(ints)
             print(res)
