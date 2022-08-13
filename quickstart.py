@@ -3,25 +3,26 @@ import pickle
 from googleapiclient.discovery import build
 from google_auth_oauthlib.flow import InstalledAppFlow
 
-##SETUP OAUTH 2.0 SETUP
-#We have to specify some scopes https://developers.google.com/calendar/api/guides/auth
-scopes = ['https://www.googleapis.com/auth/calendar']
 
-#Then we have to create a flow
-flow = InstalledAppFlow.from_client_secrets_file("client_secret.json",scopes=scopes)
-credentials = flow.run_console()
+def setupGoogleCalendar():
 
-#Then we have to create credential
-pickle.dump(credentials,open("token.pkl","wb")) #write binary stream
-credentials = pickle.load(open("token.pkl", "rb")) #read
-print(credentials)
+    #SETUP OAUTH 2.0 SETUP
+    #We have to specify some scopes https://developers.google.com/calendar/api/guides/auth
+    scopes = ['https://www.googleapis.com/auth/calendar']
 
-service = build("calendar","v3",credentials=credentials)
+    #Then we have to create a flow
+    flow = InstalledAppFlow.from_client_secrets_file("client_secret.json",scopes=scopes)
+    credentials = flow.run_console()
 
-result = service.calendarList().list().execute()
+    #Then we have to create credential
+    pickle.dump(credentials,open("token.pkl","wb")) #write binary stream
+    credentials = pickle.load(open("token.pkl", "rb")) #read
+    print(credentials)
+    service = build("calendar", "v3", credentials=credentials)
+    return service
+'''
 
 
-print(result['items'][2])
 #Imprimimos todas las keys del diccionario de resultados
 print(result['items'][2].keys())
 
@@ -34,7 +35,6 @@ print(calendar_id)
 result = service.events().list(calendarId=calendar_id,timeZone = "America/Bogota").execute()
 print('\n')
 print(result)
-
 
 #Creación de evento
 from datetime import datetime, timedelta
@@ -73,3 +73,5 @@ timezone = "America/Bogota"
 #Usando nuestra función
 event = CreateBodyEvent('Cita con caardiologo','Hosp. Almenara','Consulta general',start_time,end_time,timezone)
 service.events().insert(calendarId=calendar_id, body=event).execute()
+
+'''
