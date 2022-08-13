@@ -1,28 +1,32 @@
 
 {"intents": [
-  {"tag":  "greetings",
-  "patterns":  ["hello", "hey", "hi","good day","Greetings","what's up","how is it going?"],
-  "responses":  ["Hello!","Hey","What can I do for you"]},
+  {"tag":  "saludos",
+  "patterns":  ["hola", "holaa", "alo?", "¿que tal?", "buenos dias", "buen dia", "buenas"],
+  "responses":  ["Bienvenido, soy Neuralito y te ayudaré a agendar una cita en el sistema de salud. Te pedire unos datos personales para tenerlo todo listo, de acuerdo?"]},
 
-  {"tag":  "goodbye",
-  "patterns": ["cya","See you later","Goodbye","I am leaving","Have a Good Day","bye","Chao","see ya"],
-  "responses":  []},
+  {"tag":  "despedidas",
+  "patterns": ["hasta luego", "muchas gracias, hasta luego", "adios", "gracias y adios", "gracias por todo", "chau", "cuidate"],
+  "responses":  ["Espero haber sido de gran ayuda, vuelva pronto y buena suerte"]},
 
-  {"tag":  "age",
-  "patterns": ["how old","how old is your owner","what is your age","how old are you"],
-  "responses":  ["My owner DDR2AS es 21 years old","21 years"]},
+  {"tag":  "edad",
+  "patterns": ["que edad tienes?","que edad tienen tus creadores?","cual es tu edad?","edad"],
+  "responses":  ["Mis propietarios TRYHARD y DDR2AS tienen 20 y 21 años, respectivamente"]},
 
-  {"tag":  "name",
-  "patterns": ["What is your name","What should i call you"],
-  "responses":  ["You can call me NeuralDoc","I'm NeuralDoc","I'm Neural the assistant of DDR2AS"]},
+  {"tag":  "nombre",
+  "patterns": ["¿Cual es tu nombre?", "¿Como te puedo llamar?", "¿Como puedo llamarte?", "¿Como te llamas?", "¿Cómo te dicen?", ""],
+  "responses":  ["Puedes llamarme Neuralito","Soy Neuralito 😎","Soy Neuralito, tu asistente para agendar citas"]},
 
-  {"tag":  "shop",
-  "patterns": ["I'd like to buy something"],
-  "responses":  ["No"]},
+  {"tag":  "horarios",
+  "patterns": ["¿A que hora abren el hospital?", "horario de atencion", "¿A que hora empieza la atencion?", "¿ahora puedo ir?", ""],
+  "responses":  ["El hospital atiende por emergencias 24/7"]},
 
-  {"tag":  "hours",
-  "patterns": ["When are you guys open"],
-  "responses":  ["24/7"]}
+  {"tag":  "accidentes",
+  "patterns": ["¿a quien llamo si vi un choque?", "colision", "sangre", "contusión", "muertos", "muerte", "ambulancia", "heridos"],
+  "responses":  ["Lamento oir eso, podría brindarnos los datos de lo sucedido?"]},
+
+  {"tag":  "citas",
+  "patterns": ["documento", "agendar", "DNI", "cita", "tener cita", "quiero cita", "doctor"],
+  "responses":  ["Para agendar una cita, proporcione su DNI"]}
 ] }
 
 
