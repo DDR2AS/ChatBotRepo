@@ -1,11 +1,10 @@
-
 {"intents": [
   {"tag":  "saludos",
   "patterns":  ["hola", "holaa", "alo?", "¿que tal?", "buenos dias", "buen dia", "buenas"],
-  "responses":  ["Bienvenido, soy Neuralito y te ayudaré a agendar una cita en el sistema de salud. Te pedire unos datos personales para tenerlo todo listo, de acuerdo?"]},
+  "responses":  ["Bienvenido, soy Neuralito y te ayudare a agendar una cita en el sistema de salud."]},
 
   {"tag":  "despedidas",
-  "patterns": ["hasta luego", "muchas gracias, hasta luego", "adios", "gracias y adios", "gracias por todo", "chau", "cuidate"],
+  "patterns": ["hasta luego", "muchas gracias, hasta luego", "adios", "gracias y adios", "gracias por todo", "chau", "cuidate", "eso es todo, muchas gracias", "eso seria todo, gracias"],
   "responses":  ["Espero haber sido de gran ayuda, vuelva pronto y buena suerte"]},
 
   {"tag":  "edad",
@@ -13,20 +12,20 @@
   "responses":  ["Mis propietarios TRYHARD y DDR2AS tienen 20 y 21 años, respectivamente"]},
 
   {"tag":  "nombre",
-  "patterns": ["¿Cual es tu nombre?", "¿Como te puedo llamar?", "¿Como puedo llamarte?", "¿Como te llamas?", "¿Cómo te dicen?", ""],
-  "responses":  ["Puedes llamarme Neuralito","Soy Neuralito 😎","Soy Neuralito, tu asistente para agendar citas"]},
+  "patterns": ["¿Cual es tu nombre?", "¿Como te puedo llamar?", "¿Como puedo llamarte?", "¿Como te llamas?", "¿Como te dicen?", ""],
+  "responses":  ["Puedes llamarme Neuralito","Soy Neuralito","Soy Neuralito, tu asistente para agendar citas"]},
 
   {"tag":  "horarios",
   "patterns": ["¿A que hora abren el hospital?", "horario de atencion", "¿A que hora empieza la atencion?", "¿ahora puedo ir?", ""],
-  "responses":  ["El hospital atiende por emergencias 24/7"]},
+  "responses":  ["El hospital atiende por emergencias 24/7. El horario de atencion para citas medicas es de 6:00 am a 10:00 pm"]},
 
   {"tag":  "accidentes",
-  "patterns": ["¿a quien llamo si vi un choque?", "colision", "sangre", "contusión", "muertos", "muerte", "ambulancia", "heridos"],
+  "patterns": ["¿a quien llamo si vi un choque?", "colision", "sangre", "contusion", "muertos", "muerte", "ambulancia", "heridos", "accidente"],
   "responses":  ["Lamento oir eso, podría brindarnos los datos de lo sucedido?"]},
 
   {"tag":  "citas",
   "patterns": ["documento", "agendar", "DNI", "cita", "tener cita", "quiero cita", "doctor"],
   "responses":  ["Para agendar una cita, proporcione su DNI"]}
-] }
+]}
 
 
