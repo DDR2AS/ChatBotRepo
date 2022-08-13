@@ -2,19 +2,17 @@ import pickle
 import json
 import nltk
 from nltk.stem import WordNetLemmatizer
-
 import time
-
 from tensorflow.keras.models import load_model
 from chatbot import *
 from quickstart import *
+import datefinder
 
 global service
-
+calendarID = 0;
 # DNI de corroboración temporal hasta que funcione con la RENIEC
 DNI_probe = 72956984
 DNI_owner_name = "Harold"
-
 
 def main():
     # Para el chatbot
@@ -25,9 +23,10 @@ def main():
     classes = pickle.load(open("classes.pkl", "rb"))
     model = load_model("chatbotmodel.h5")
 
-    # service = setupGoogleCalendar();
-    # result = service.calendarList().list().execute()
-    # print(result['items'][2])
+    service = setupGoogleCalendar();
+    CalendarList = service.calendarList().list().execute()
+    print(CalendarList['items'][2])
+    calendar_id = CalendarList['items'][2]['id']
 
     a = 0
     flag = True
@@ -64,29 +63,51 @@ def main():
                         print(f"Gusto en verte {DNI_owner_name}!!!")
                         flag_1 = True
                         hay_cupos = True # Este sirve por ahora para que acepte que si hay cupos
+                        fecha_valida = False
                         while flag_1:
-                            print("Necesitaré algunos datos para que agendemos una cita ☺")
-                            print("Recuerde que cada una dura de 30 minutos")
+                            print("Necesitaré algunos datos para que agendemos una cita ☺\nRecuerde que cada una dura de 30 minutos")
                             print(f'Si le es de ayuda la fecha actual es {time.strftime("%d/%m/%y")}')
                             print("Tambien recuerde que solo puede agendar solo una cita por mes y solo hasta un mes "
                                   "después de la fecha actual")
-                            Mes = time.strftime("%d/%m/%y")[3:5] # No hay necesidad de preguntar el mes
-                            Dia = input("Que dia quiere su cita?: ")
+
+                            #Preguntamos el día y hora de la cita
+                            strDateAppointment = input("Indique la fecha y la hora de inicio de la cita: ")
+
+                            #Creación del evento
+                            matches = datefinder.find_dates(strDateAppointment)
+                            match = list(matches)
+                            if len(match):
+                                #Si tenemos una fecha válida encontrada
+                                print(f'La fecha es: {match[0]}')
+                                fecha_valida = True
+                            else:
+                                print("Fecha invalida")
+                                fecha_valida = False
+
+
+                            #Mes = time.strftime("%d/%m/%y")[3:5] # No hay necesidad de preguntar el mes
+                            #Dia = input("Que dia quiere su cita?: ")
                             # Interaccion con GoogleCalendar para saber si hay cupos
-                            print("¿A que hora quiere que sea su cita?")
-                            print("Aquí le enseñó horas validas => 10:30:00, 19:00:00, 06:30:00")
-                            TiempoInicio_Hora, TiempoInicio_Minuto, TiempoInicio_Segundo = input("Ingrese la fecha en "
-                                                                                                 "el siguiente "
-                                                                                                 "formato (HH:MM:SS): "
-                                                                                                 "").strip().split(":")
+                            #print("¿A que hora quiere que sea su cita?")
+                            #print("Aquí le enseñó horas validas => 10:30:00, 19:00:00, 06:30:00")
+                            #TiempoInicio_Hora, TiempoInicio_Minuto, TiempoInicio_Segundo = input("Ingrese la fecha en "
+                                                                                                # "el siguiente "
+                                                                                                # "formato (HH:MM:SS): "
+                                                                                                # "").strip().split(":")
                             # Interaccion con GoogleCalendar para saber si hay cupos
-                            if hay_cupos:
+                            if hay_cupos & fecha_valida:
                                 print("Tenemos consultas para el area de cardiologia y consultas generales")
                                 print("Recuerde solo ingresar o 'Cardiologia' o 'General'")
                                 TipoConsulta = input("¿Que tipo de consulta desea?: ").strip()
                                 print("Espere unos instantes mientras se reserva su cita")
+                                #Creación de la descripcisón
+                                description = "Hospital EsSalud\n" + "Paciente: "+ DNI_owner_name
                                 # Se crea el evento en GoogleCalendar
-                                print("La cita fue agendada con éxito!!")
+                                eventbody = CreateEvent(calendar_id,service,strDateAppointment,TipoConsulta,description)
+                                if eventbody != None:
+                                    print(f"La cita fue agendada con éxito!!\n {eventbody}")
+                                else:
+                                    print("No se agendo mano")
                                 message = input("*: ") # Supuestamente, un usuario normal aquí se despediria V:
                                 # message = "adios"
                                 ints = predict_class(message)

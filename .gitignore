@@ -1,2 +1,5 @@
 .idea
 
+/token.pkl
+/calendarios.txt
+/test.py
