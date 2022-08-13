@@ -45,9 +45,9 @@ def main():
             print(res)
             while flag:
                 try:
-                    DNI_number = input("Digite su número de DNI: ")
-                    c = int(DNI_number)
-                    if len(DNI_number) != 8:
+                    strDNI_number = input("Digite su número de DNI: ")
+                    c = int(strDNI_number)
+                    if len(strDNI_number) != 8:
                         raise ZeroDivisionError
                     DNI_number = c
                 except ValueError:
@@ -57,9 +57,10 @@ def main():
                 else:
                     print("Comprobando DNI en la base de datos. Por favor, espere un momento...")
                     # Acá debería ir la conexión con la página de la RENIEC
-                    # DNI_owner_name = consult(API_RENIEC(DNI_number))
-                    # if DNI_owner_name != "":
-                    if DNI_probe == DNI_number:
+                    result = consultNameOwner(strDNI_number)
+
+                    if result['success']:
+                        DNI_owner_name = result['Names']
                         print(f"Gusto en verte {DNI_owner_name}!!!")
                         flag_1 = True
                         hay_cupos = True # Este sirve por ahora para que acepte que si hay cupos
