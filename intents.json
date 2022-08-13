@@ -4,7 +4,7 @@
   "responses":  ["Bienvenido, soy Neuralito y te ayudare a agendar una cita en el sistema de salud."]},
 
   {"tag":  "despedidas",
-  "patterns": ["hasta luego", "muchas gracias, hasta luego", "adios", "gracias y adios", "gracias por todo", "chau", "cuidate", "eso es todo, muchas gracias", "eso seria todo, gracias"],
+  "patterns": ["nada", "hasta luego", "muchas gracias, hasta luego", "adios", "gracias y adios", "gracias por todo", "chau", "cuidate", "eso es todo, muchas gracias", "eso seria todo, gracias"],
   "responses":  ["Espero haber sido de gran ayuda, vuelva pronto y buena suerte"]},
 
   {"tag":  "edad",

@@ -66,7 +66,7 @@ def main():
 
                         if DNI_trial == DNI_owner_name:
 
-                            print(f"Gusto en verte {DNI_owner_name}!!!")
+                            print(f"Gusto en verte {DNI_owner_name.capitalize()}!!!")
                             flag_1 = True
                             hay_cupos = True  # Este sirve por ahora para que acepte que si hay cupos (implementar en
                             # la linea 81)
@@ -90,7 +90,7 @@ def main():
                                 # Interaccion con GoogleCalendar para saber si hay cupos
                                 if len(match):
                                     # Si tenemos una fecha válida encontrada
-                                    print(f'La fecha es: {match[0]}')
+                                    # print(f'La fecha es: {match[0]}')
                                     fecha_valida = True
 
                                 else:
@@ -112,7 +112,15 @@ def main():
                                                             TipoConsulta, description)
 
                                     if eventbody is not None:
-                                        print(f"La cita fue agendada con éxito para el {match}!!\n {eventbody}")
+                                        # print(f"La cita fue agendada con éxito para el {match}!!\n {eventbody}")
+                                        print("La cita fue agendada con exito!!")
+                                        print(30 * "-")
+                                        print("Resumen de la cita:")
+                                        print(f"Local: Hospital Almenara")
+                                        print(f'Paciente: {DNI_owner_name.capitalize()}')
+                                        print(f"Area de consulta: {TipoConsulta}")
+                                        print(f"Fecha de la cita: {match[0]}")
+                                        print(30*"-")
 
                                     else:
                                         print("Lo sentimos, la cita no pudo ser agendada")
