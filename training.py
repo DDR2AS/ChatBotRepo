@@ -17,7 +17,7 @@ intents = json.loads(open('intents.json').read()) # Creación de diccionario
 words = []
 classes = []
 documents = []
-ignore_letters = ['?','!','.',',']
+ignore_letters = ['?', '!', '.', ',', '¿', '¡']
 
 # Ahora necesitamos acceder al objeto intents y a los keys y a los diccionarios internos
 for intent in intents['intents']:
