@@ -65,7 +65,30 @@ def CreateBodyEvent(summary,description,location,startTime,endTime,TimeZone):
     }
     return eventBody
 
+import requests
+import json
+def VerificarIdentidad(dni):
+    url = "https://www.softwarelion.xyz/api/reniec/reniec-dni"
+    _json = { "dni": dni }
+    token = "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyX2lkIjoxNzE3LCJjb3JyZW8iOiJkaWVnby5hdmlsYTEyMzk0QGdtYWlsLmNvbSIsImlhdCI6MTY2MDQwMDYxNX0.lRhe0yQd2LdxUlKA_o4FNVj3TCTnnNvpLClCVEzgZLw"
+    _headers = {'Content-Type' : 'application/json' ,'Authorization': token}
+    response  = requests.post(url,data=json.dumps(_json), headers= _headers)
 
+    #Convertimos a json para poder acceder a ellos
+    return response
+    print(response.content)
+    print(dataJson.keys)
+
+def consultNameOwner(dni):
+    response = VerificarIdentidad(dni)
+    dataJson = response.json()
+    if dataJson['success']:
+        strName = dataJson['result']['nombres'] + " " + dataJson['result']['paterno'] + " " + dataJson['result']['materno']
+        result = {'success': True, 'Names': strName}
+        return result
+    else:
+        result = {'success': False, 'Names': ''}
+        return
 '''
 #Imprimimos todas las keys del diccionario de resultados
 print(result['items'][2].keys())
